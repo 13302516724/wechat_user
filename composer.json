@@ -1,0 +1,21 @@
+{
+    "name": "zzx/wechart_user",
+    "description": "user",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "zhaoxin",
+            "email": "1064059707@qq.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+		"php": ">=5.3"
+	},
+	"autoload": {
+		"psr-4": {
+			"Zzx\\user\\wechat\\": "user/wechat/"
+		}
+	}
+}
