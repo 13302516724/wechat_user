@@ -2,22 +2,32 @@
 微信公共平台接口操作  
 #使用方法
 
-use Zzx\user\wechat\WxCommon;  
-可进行 new WxCommon();实例化操作，也可以进行 extends Wxcommon 继承  
-初始化时，配置好appid和appsercret  
+use Zzx\user\wechat\WxMethod;
+```
+public function __construct($config = null)
+    {
+        parent::__construct();
+        $config['appid'] = '你的appid';
+        $config['appsecret'] = '你的appsecret';
+        $this->WxMethod = new WxMethod($config['appid'],$config['appsecret']);
+        $this->config = $config;
+    }
+```
 
-# 使用GET方法获取时
-获取access_token接口  
-$url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid={$appid}&secret={$appsecret}";  
-$return = $this->requestAndCheck($url, 'GET');  
+# 获取access_token
+```
+    public function getAccessToken()
+    {
+        $this->WxMethod->getAccessToken();
+    }
+```
+# 目前已整理的微信第三方类  
+1. getUserList();获取微信公共号用户列表  
+2. getUserInfo('openid');获取某一用户的详细信息，参数一为用户的openid。  
+3. sendMsgToOne('openid','type','content');先某一用户发送消息，参数一为用户的openid，参数二为用户的消息类型，参数三为发送内容。  
+4. getAllTemplateMsg();获取公共号消息模板。  
+5. sendTemplateMsg();向指定用户发送模板消息，参数一为用户的openid，参数二为消息模板 id，参数三为需要跳转的url，参数四为发送的数据（array）。  
+6. getSignPackage();获取微信JS-SDK的config权限配置信息。  
 
-#使用post方法时
-模板发送接口  
-$url ="https://api.weixin.qq.com/cgi-bin/message/template/send?access_token={$access_token}";  
-$return = $this->requestAndCheck($url, 'POST', $post);  
-
-温馨提示
-按照 https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1433751277 上的接口规范
-根据需要处理相关逻辑
 
 
